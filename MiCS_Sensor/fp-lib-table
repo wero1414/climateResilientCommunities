@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name "MiCS_Sensor")(type "KiCad")(uri "${KIPRJMOD}/MiCS_Sensor.pretty")(options "")(descr ""))
+)
