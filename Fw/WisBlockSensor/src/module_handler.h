@@ -80,6 +80,7 @@ extern sensors_t found_sensors[];
 #define LPP_CHANNEL_CO2_HUMID_2 37	   // RAK12037
 #define LPP_CHANNEL_TEMP_3 38		   // RAK12003
 #define LPP_CHANNEL_TEMP_4 39		   // RAK12003
+#define LPP_CHANNEL_NO2_1 40		  
 
 extern WisCayenne g_solution_data;
 

@@ -26,3 +26,5 @@ fp-info-cache
 *.csv
 
 MiCS_Sensor/MiCS_Sensor-backups/
+
+MiCS_Sensor/#auto_saved_files#

@@ -71,7 +71,7 @@ void setup_app(void)
 {
 	// Initialize Serial for debug output
 	Serial.begin(115200);
-
+	analogReadResolution(12);
 	time_t serial_timeout = millis();
 	// On nRF52840 the USB serial is not available immediately
 	while (!Serial)
@@ -87,8 +87,19 @@ void setup_app(void)
 		}
 	}
 
+	//Turn on 3.3v for sensors	
 	pinMode(WB_IO2, OUTPUT);
 	digitalWrite(WB_IO2, HIGH);
+	
+	//Pre heat for MiCS sensor
+	pinMode(WB_IO1,OUTPUT);
+	AT_PRINTF("Pre heating\n");
+	Serial.println("pre heating");
+	digitalWrite(WB_IO1, HIGH);
+	//delay (30000); 300 secs
+	AT_PRINTF("Pre heating done\n");
+	digitalWrite(WB_IO1, LOW);
+
 
 	delay(500);
 
@@ -346,6 +357,17 @@ void app_event_handler(void)
 				// Read environment data
 				read_rak1902();
 			}
+			//Get MiCS Sensor Data
+			uint16_t no2=analogRead(WB_A0);
+			//Convert to voltaje
+			float vno2=(3.3*no2)/4096;
+			//Convert to resist
+			float rno2=((270*(3.3-vno2))/vno2);//load resistor in ox 270ohm
+			//Convert to indicator concentration
+			float conNO2= 270/rno2;
+			//Calculo de particulas por millon 
+			float ppmNO2= ((-0.0003*(conNO2*conNO2))+(0.1626*conNO2)-0.0217);
+			g_solution_data.addGenericSensor(LPP_CHANNEL_NO2_1,ppmNO2);
 
 			MYLOG("APP", "Packetsize %d", g_solution_data.getSize());
 			if (g_lorawan_settings.lorawan_enable)
