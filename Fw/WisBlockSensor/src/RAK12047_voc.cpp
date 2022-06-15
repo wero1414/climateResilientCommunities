@@ -17,8 +17,8 @@
 /** Instance for the VOC sensor */
 SensirionI2CSgp40 sgp40;
 /** Instance for the VOC algorithm */
-VOCGasIndexAlgorithm voc_algorithm = VOCGasIndexAlgorithm();
-
+//VOCGasIndexAlgorithm voc_algorithm = VOCGasIndexAlgorithm();
+VOCGasIndexAlgorithm voc_algorithm;
 /** Timer for VOC measurement */
 SoftwareTimer voc_read_timer;
 
