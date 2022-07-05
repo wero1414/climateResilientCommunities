@@ -28,7 +28,7 @@ time_t min_delay = 45000;
 bool g_gps_prec_6 = true;
 
 /** Switch between Cayenne LPP and Helium Mapper data packet */
-bool g_is_helium = false;
+bool g_is_helium = true;
 
 /** Flag for battery protection enabled */
 bool battery_check_enabled = false;
@@ -96,7 +96,7 @@ void setup_app(void)
 	AT_PRINTF("Pre heating\n");
 	Serial.println("pre heating");
 	digitalWrite(WB_IO1, HIGH);
-	//delay (30000); 300 secs
+	delay(15000); //30 secs
 	AT_PRINTF("Pre heating done\n");
 	digitalWrite(WB_IO1, LOW);
 
@@ -359,14 +359,28 @@ void app_event_handler(void)
 			}
 			//Get MiCS Sensor Data
 			uint16_t no2=analogRead(WB_A0);
+			uint16_t ADC2=analogRead(WB_A1);
+			Serial.print("Analog 1 read = ");
+			Serial.println(no2);
+			
 			//Convert to voltaje
 			float vno2=(3.3*no2)/4096;
+			Serial.print("Voltage read = ");
+			Serial.println(vno2);
 			//Convert to resist
 			float rno2=((270*(3.3-vno2))/vno2);//load resistor in ox 270ohm
 			//Convert to indicator concentration
 			float conNO2= 270/rno2;
+
+			//Reduced formula
+			float conNO2red = no2/(4095-no2);
+			Serial.println("Concentration 1 = "+String(conNO2));
+			Serial.println("Concentration 2 = "+String(conNO2red));
+
 			//Calculo de particulas por millon 
 			float ppmNO2= ((-0.0003*(conNO2*conNO2))+(0.1626*conNO2)-0.0217);
+
+			Serial.println("PPM = "+String(conNO2red));
 			g_solution_data.addGenericSensor(LPP_CHANNEL_NO2_1,ppmNO2);
 
 			MYLOG("APP", "Packetsize %d", g_solution_data.getSize());
