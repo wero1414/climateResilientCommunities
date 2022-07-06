@@ -7,7 +7,7 @@ const Promise = require('bluebird');
   });
 
 // replace the value below with the Telegram token you receive from @BotFather
-const token = '5495529357:AAG-ZlxjGe1stKF4_TvnMgkd9i5WNbGxxa4';
+const token = 'TELEGRAM-KEY';
 
 // Create a bot that uses 'polling' to fetch new updates
 const bot = new TelegramBot(token, {polling: true});
@@ -67,7 +67,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
   msg += humidity;
   msg += " \nPPM = "
   msg += ppm;
-  chatIDG = 229458447;
+  chatIDG = EXCTRACT_CHAT_ID_FOR_YOUR_BOT;
   bot.sendMessage(chatIDG, msg);
   response.sendStatus(200);
 
