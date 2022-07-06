@@ -1,0 +1,69 @@
+{
+    "structuredData": {
+        "payload": "AXQAEQZoXgdnASEIcx/0CQIFOygCAGk=",
+        "port": 2,
+        "reported_at": 1657084728999,
+        "dev_eui": "6081F934286513CE",
+        "devaddr": "1C000048",
+        "downlink_url": "https://console.helium.com/api/v1/down/36115781-b41a-4c89-b42c-e607f88f1b17/_r-Is7uIDZy5YG_3D00rMlyG3_pXgqOL/5a97d5da-34b3-44ba-929e-d6934ca2b0fd",
+        "uuid": "29e648d4-71cc-42e1-80b0-ce0591e0ac5b",
+        "decoded": {
+            "status": "success",
+            "payload": {
+                "data": {
+                    "analog_in_9": 13.39,
+                    "analog_in_40": 1.05,
+                    "barometer_8": 818,
+                    "humidity_6": 47,
+                    "temperature_7": 28.9,
+                    "voltage_1": 0.17
+                }
+            }
+        },
+        "replay": false,
+        "fcnt": 52,
+        "name": "testHackaday",
+        "id": "5a97d5da-34b3-44ba-929e-d6934ca2b0fd",
+        "raw_packet": "QBwAAEgANAACCFhMCRkOgBOTa21aYmno+IXjiU8vPkQoq1J4",
+        "hotspots": [
+            {
+                "snr": 9,
+                "id": "13gm6incqeAaZ5vHWjv5RkGfGTFrXkv6JbsEsqkye64ArymCnfN",
+                "lat": 21.88563891848682,
+                "name": "sharp-tin-tadpole",
+                "spreading": "SF7BW125",
+                "channel": 4,
+                "status": "success",
+                "long": -102.40085401537577,
+                "rssi": -17,
+                "reported_at": 1657084728999,
+                "frequency": 904.7000122070312,
+                "hold_time": 140
+            }
+        ],
+        "app_eui": "6081F99FDBCAB962",
+        "type": "uplink",
+        "payload_size": 23,
+        "dc": {
+            "balance": 95875,
+            "nonce": 2
+        },
+        "metadata": {
+            "adr_allowed": false,
+            "cf_list_enabled": false,
+            "rx_delay_actual": 1,
+            "multi_buy": 1,
+            "preferred_hotspots": [],
+            "rx_delay": 1,
+            "rx_delay_state": "rx_delay_established",
+            "organization_id": "505e67f3-fb9e-45ab-a849-06ef302e5bfc",
+            "labels": [
+                {
+                    "id": "5f5411fd-ee53-49c8-a695-bc76105f7977",
+                    "organization_id": "505e67f3-fb9e-45ab-a849-06ef302e5bfc",
+                    "name": "Node1"
+                }
+            ]
+        }
+    }
+}
