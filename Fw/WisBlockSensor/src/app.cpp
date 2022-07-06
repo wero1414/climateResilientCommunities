@@ -96,7 +96,7 @@ void setup_app(void)
 	AT_PRINTF("Pre heating\n");
 	Serial.println("pre heating");
 	digitalWrite(WB_IO1, HIGH);
-	delay(15000); //30 secs
+	//delay(30000); //30 secs
 	AT_PRINTF("Pre heating done\n");
 	digitalWrite(WB_IO1, LOW);
 
@@ -359,29 +359,20 @@ void app_event_handler(void)
 			}
 			//Get MiCS Sensor Data
 			uint16_t no2=analogRead(WB_A0);
-			uint16_t ADC2=analogRead(WB_A1);
+			//uint16_t ADC2=analogRead(WB_A1);
 			Serial.print("Analog 1 read = ");
 			Serial.println(no2);
 			
 			//Convert to voltaje
 			float vno2=(3.3*no2)/4096;
-			Serial.print("Voltage read = ");
-			Serial.println(vno2);
+			Serial.println("Voltage read = "+String(vno2,3));
 			//Convert to resist
-			float rno2=((270*(3.3-vno2))/vno2);//load resistor in ox 270ohm
+			float rno2=((269*(3.3-vno2))/vno2);//load resistor in ox 270ohm
 			//Convert to indicator concentration
-			float conNO2= 270/rno2;
-
-			//Reduced formula
-			float conNO2red = no2/(4095-no2);
-			Serial.println("Concentration 1 = "+String(conNO2));
-			Serial.println("Concentration 2 = "+String(conNO2red));
-
-			//Calculo de particulas por millon 
-			float ppmNO2= ((-0.0003*(conNO2*conNO2))+(0.1626*conNO2)-0.0217);
-
-			Serial.println("PPM = "+String(conNO2red));
-			g_solution_data.addGenericSensor(LPP_CHANNEL_NO2_1,ppmNO2);
+			float conNO2= 820/rno2*10;
+			Serial.println("RS/R0 = "+String(conNO2,3));
+			
+			g_solution_data.addAnalogInput(LPP_CHANNEL_NO2_1,conNO2);
 
 			MYLOG("APP", "Packetsize %d", g_solution_data.getSize());
 			if (g_lorawan_settings.lorawan_enable)
