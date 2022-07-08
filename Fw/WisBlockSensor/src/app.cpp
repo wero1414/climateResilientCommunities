@@ -96,7 +96,7 @@ void setup_app(void)
 	AT_PRINTF("Pre heating\n");
 	Serial.println("pre heating");
 	digitalWrite(WB_IO1, HIGH);
-	//delay(30000); //30 secs
+	delay(30000); //30 secs
 	AT_PRINTF("Pre heating done\n");
 	digitalWrite(WB_IO1, LOW);
 
@@ -359,19 +359,9 @@ void app_event_handler(void)
 			}
 			//Get MiCS Sensor Data
 			uint16_t no2=analogRead(WB_A0);
-			//uint16_t ADC2=analogRead(WB_A1);
-			Serial.print("Analog 1 read = ");
-			Serial.println(no2);
-			
-			//Convert to voltaje
-			float vno2=(3.3*no2)/4096;
-			Serial.println("Voltage read = "+String(vno2,3));
-			//Convert to resist
-			float rno2=((269*(3.3-vno2))/vno2);//load resistor in ox 270ohm
-			//Convert to indicator concentration
-			float conNO2= 820/rno2*10;
-			Serial.println("RS/R0 = "+String(conNO2,3));
-			
+			float vno2=(3.3*no2)/4096;	//Convert to voltaje
+			float rno2=((269*(3.3-vno2))/vno2);	//Convert to resist
+			float conNO2= rno2/9420*10;	//Convert to indicator concentration
 			g_solution_data.addAnalogInput(LPP_CHANNEL_NO2_1,conNO2);
 
 			MYLOG("APP", "Packetsize %d", g_solution_data.getSize());
